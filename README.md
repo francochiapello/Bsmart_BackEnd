@@ -3,7 +3,7 @@
 1. node version 18.12.1
 2. php version 8.2.12
 3. composer version 2.6.6
-4. server used xampp version
+4. web server used xampp version
 5. database used mysql
 
 ## MYSQL

@@ -11,6 +11,15 @@ class Product extends Model
     use HasFactory;
     protected $fillable = ['name','description','price','stock','category_id'];
 
+
+    static public function findIsAsociate(string $id){
+        $request = self::select('products.*');
+        $request = $request->where('category_id','=',$id);
+        $request = $request->paginate();
+
+        return $request;
+    }
+
     static public function findBy(){
         $request = self::select('products.*');
 

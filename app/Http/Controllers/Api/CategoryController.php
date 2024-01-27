@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Category;
+use App\Models\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,10 @@ class CategoryController extends Controller
 
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:120'
+        ]);
+
         $category = Category::findOrFail($id);
 
         $category->name = $request->name;
@@ -49,6 +54,13 @@ class CategoryController extends Controller
 
     public function destroy(string $id)
     {
+        $category = Category::findOrFail($id);
+        $products = Product::findIsAsociate("10");
+
+        if (empty($products->data)) {
+            throw new \Exception('No se puede eliminar la característica porque está asociada a uno o más productos.');
+        }
+
         $category = Category::destroy($id);
 
         return $category;
