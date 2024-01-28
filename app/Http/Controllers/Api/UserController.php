@@ -80,7 +80,7 @@ class UserController extends Controller
             if(!Auth::attempt($request->only(['email', 'password']))){
                 return response()->json([
                     'status' => false,
-                    'message' => 'Email & Password does not match with our record.',
+                    'message' => 'El email o contraseña son invalidos',
                 ], 401);
             }
 
